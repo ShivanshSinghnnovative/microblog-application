@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        Search tag 
+        Search Hashtag : 
         <input type="text">
     </div>
     <div class="blogContainer">
@@ -17,7 +17,7 @@
             <img src="/red.png">
           {{ blogs.like }}
          </div>
-         <div class="topic" v-for="topic in blogsData.topics" :key="topic.id">
+         <div class="topic" v-for="topic in blogs.topics" :key="topic.id">
              # {{topic}}
          </div>
 
@@ -27,7 +27,6 @@
 </template>
 
 <script setup>
-
 
 import { ref } from "vue"
 
@@ -64,11 +63,21 @@ import { ref } from "vue"
 </script>
 
 <style scoped>
+.header{
+    padding: 2rem;
+    font-size: 20px;
+}
 .container{
-    border: 2px solid black;
+    border: 2px solid lightgray;
     box-shadow: 6px 6px lightgray;
     width: 20rem;
     border-radius: .5rem;
+}
+input{
+    border: none;
+    border-bottom: 1px solid gray;
+    font-size: 21px;
+    padding: .3rem;
 }
 .blogContainer{
     display: flex;
@@ -76,8 +85,12 @@ import { ref } from "vue"
     margin-top: 2rem;
 }
 img{
-    height: 12px;
-    width: 12px;
+    height: 17px;
+    width: 17px;
+}
+.topic{
+    text-align: center;
+    padding: .3rem;
 }
 .title{
     padding: 2rem;
