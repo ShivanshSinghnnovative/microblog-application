@@ -5,14 +5,18 @@
 </template>
 
 <script setup>
-import { ref, watch, defineEmits } from 'vue';
+import { watch, defineEmits, defineProps } from 'vue';
 
-const searchBar = ref('');
+const props = defineProps({
+    searchText: String,
+});
+
+console.log(props);
 
 const emit = defineEmits('searchHashtag');
 
 watch(() => {
-  emit('searchHashtag', searchBar.value);
+  emit('searchHashtag', props.searchText);
 });
 </script>
 

@@ -2,7 +2,7 @@
     <searchHastag @searchHashtag="updateHashTagFilter">
         <template v-slot:search>
             Search Hashtag :
-            <input type="text" v-model="searchBar">
+            <input type="text" v-model="searchTerm" :searchTerm="searchTerm">
         </template>
     </searchHastag>
     <div class="blogContainer">
@@ -20,7 +20,7 @@
                     {{ blog.like }}
                 </div>
 
-                <hastagLists :blog="blog" @clickedTopic="updateSearchHashtag" />
+                <hastagLists :blog="blog" @clickedTopic="updateHashTagFilter" />
             </template>
         </cardDetails>
     </div>
@@ -35,18 +35,14 @@ import { ref, computed } from 'vue'
 
 
 const blogData = ref(blogsDatas);
-const searchBar = ref('');
-
-const updateSearchHashtag = (topic) => {
-    searchBar.value = topic;
-};
+const searchTerm = ref('');
 
 const updateHashTagFilter = (hashtag) => {
-    searchBar.value = hashtag;
+    searchTerm.value = hashtag;
 };
 
 const filteredBlogs = computed(() => {
-    const query = searchBar.value.trim().toLowerCase();
+    const query = searchTerm.value.trim().toLowerCase();
 
     if (!query) {
         return blogData.value;
