@@ -1,10 +1,12 @@
 <template>
-    <div class="header">
-        Search Hashtag :
-        <input type="text">
-    </div>
+    <hashtagSearch @searchHashtag="updateHashTagFilter">
+        <template v-slot:search>
+            Search Hashtag :
+            <input type="text" v-model="searchHashtag">
+        </template>
+    </hashtagSearch>
     <div class="blogContainer">
-        <cardDetails v-for="blog in blogData" :key="blog.id">
+        <cardDetails v-for="blog in filteredBlogs" :key="blog.id">
             <template v-slot:titles>
                 {{ blog.title }}
             </template>
@@ -12,14 +14,13 @@
                 {{ blog.description }}
             </template>
             <template v-slot:footer>
-              
-              <div> 
-                <img src="../public/red.png">
-                {{ blog.like }}
-               </div> 
-                <div class="topic" v-for="topic in blog.topics" :key="topic.id" >
-                    # {{ topic }}
+
+                <div class="like">
+                    <img src="../public/red.png" @click="incrementLike(blog)">
+                    {{ blog.like }}
                 </div>
+
+                <hastagLists :blog="blog" @clickedTopic="updateSearchHashtag" />
             </template>
         </cardDetails>
     </div>
@@ -27,16 +28,49 @@
   
 <script setup>
 import cardDetails from './components/cardDetails.vue'
+import hashtagSearch from './components/searchHastag.vue'
+import hastagLists from './components/hastagLists.vue'
 import blogsDatas from './assets/blogData.json'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+
 
 const blogData = ref(blogsDatas);
+const searchHashtag = ref('');
+
+const updateSearchHashtag = (topic) => {
+    searchHashtag.value = topic;
+};
+
+const updateHashTagFilter = (hashtag) => {
+    searchHashtag.value = hashtag;
+};
+
+const filteredBlogs = computed(() => {
+    const query = searchHashtag.value.trim().toLowerCase();
+
+    if (!query) {
+        return blogData.value;
+    }
+
+    return blogData.value.filter(blog =>
+        blog.topics.some(topic => topic.toLowerCase().includes(query))
+    );
+});
+
+const incrementLike = (blog) => {
+    blog.like += 1;
+}
 </script>
   
 <style>
-*{
+* {
     font-family: sans-serif;
 }
+
+.like {
+    cursor: pointer;
+}
+
 .container {
     border: 2px solid lightgray;
     box-shadow: 6px 6px rgb(229, 228, 228);
@@ -44,9 +78,10 @@ const blogData = ref(blogsDatas);
     border-radius: .5rem;
 }
 
-hr{
+hr {
     border: .3px solid rgb(238, 233, 233);
 }
+
 .title {
     padding: 2rem;
     text-align: center;
@@ -67,6 +102,7 @@ hr{
     font-size: 20px;
     padding: 0.8rem;
 }
+
 .header {
     padding: 2rem;
     font-size: 20px;
