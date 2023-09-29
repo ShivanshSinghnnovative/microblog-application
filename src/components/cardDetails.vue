@@ -1,110 +1,58 @@
 <template>
-    <div class="header">
-        Search Hashtag : 
-        <input type="text">
-    </div>
-    <div class="blogContainer">
-    <div class="container" v-for="blogs in blogsData" :key="blogs.id">
+    <div class="container">
         <div class="title">
-                 {{ blogs.title }}
+            <slot name="titles">
+            </slot>
         </div>
-        <hr/>
+        <hr />
         <div class="description">
-            {{ blogs.description }}
+            <slot name="description">
+            </slot>
         </div>
-        <hr/>
-         <div class="like">
-            <img src="/red.png">
-          {{ blogs.like }}
-         </div>
-         <div class="topic" v-for="topic in blogs.topics" :key="topic.id">
-             # {{topic}}
-         </div>
-
+        <hr />
+        <div class="like">
+            <slot name="likes">
+            </slot>
+        </div>
+        <div class="topic">
+            <slot name="Hashtag">
+            </slot>
+        </div>
     </div>
-</div>
-
 </template>
 
 <script setup>
 
-import { ref } from "vue"
-
-    const blogsData = ref([
-        {
-            id: "1",
-            title: "learning Vue.js 3",
-            description: "I am learning vue.js with composition Api. I feel great",
-            like: 20,
-            topics: ["vue-3", "javascript", "composition api"]
-        },
-        {
-            id: "2",
-            title: "learning Vuex",
-            description: "vuex is a state management pattern + library for Vue.js applications.",
-            like: 18,
-            topics: ["vue", "Vuex", "flux"]
-        },
-        {
-            id: "3",
-            title: "routing with vue router ",
-            description: "I am making a complex vue3 app with the help of multi level routing",
-            like: 24,
-            topics: ["vue-3", "vue-router", "axios"]
-        },
-        {
-            id: "4",
-            title: "testing in vue",
-            description: "I am writing some test for my vueapp using vue test utilis. it great to learn it",
-            like: 17,
-            topics: ["vue", "javascript", "testing"]
-        }
-    ])
 </script>
 
 <style scoped>
-.header{
-    padding: 2rem;
-    font-size: 20px;
-}
-.container{
+.container {
     border: 2px solid lightgray;
     box-shadow: 6px 6px lightgray;
     width: 20rem;
     border-radius: .5rem;
 }
-input{
-    border: none;
-    border-bottom: 1px solid gray;
-    font-size: 21px;
-    padding: .3rem;
-}
-.blogContainer{
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 2rem;
-}
-img{
-    height: 17px;
-    width: 17px;
-}
-.topic{
+
+.topic {
     text-align: center;
     padding: .3rem;
 }
-.title{
+
+.title {
     padding: 2rem;
     text-align: center;
     font-size: 25px;
     font-weight: 600;
 }
-.description{
+
+.description {
     height: 8rem;
     padding: 2rem;
     text-align: center;
     font-size: 20px;
 }
-.like{
+
+.like {
     text-align: center;
     font-size: 20px;
     padding: 0.8rem;
