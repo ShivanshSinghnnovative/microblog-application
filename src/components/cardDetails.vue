@@ -11,13 +11,10 @@
         </div>
         <hr />
         <div class="like">
-            <slot name="likes">
+            <slot name="footer">
             </slot>
         </div>
-        <div class="topic">
-            <slot name="Hashtag">
-            </slot>
-        </div>
+       
     </div>
 </template>
 
@@ -26,23 +23,25 @@
 </script>
 
 <style scoped>
+*{
+    font-family: sans-serif;
+}
 .container {
     border: 2px solid lightgray;
-    box-shadow: 6px 6px lightgray;
+    box-shadow: 6px 6px rgb(229, 228, 228);
     width: 20rem;
     border-radius: .5rem;
 }
 
-.topic {
-    text-align: center;
-    padding: .3rem;
+hr{
+    border: .3px solid rgb(238, 233, 233);
 }
-
 .title {
     padding: 2rem;
     text-align: center;
     font-size: 25px;
     font-weight: 600;
+    height: 2rem;
 }
 
 .description {

@@ -11,11 +11,11 @@
             <template v-slot:description>
                 {{ blog.description }}
             </template>
-            <template v-slot:likes>
-                <img src="../public/red.png">
+            <template v-slot:footer>
+              
+              <div> <img src="../public/red.png">
                 {{ blog.like }}
-            </template>
-            <template v-slot:Hashtag>
+               </div> 
                 <div class="topic" v-for="topic in blog.topics" :key="topic.id">
                     # {{ topic }}
                 </div>
@@ -26,7 +26,7 @@
   
 <script setup>
 import cardDetails from './components/cardDetails.vue'
-import blogsDatas from './assets/jsondata.json'
+import blogsDatas from './assets/blogData.json'
 import { ref } from 'vue'
 
 const blogData = ref(blogsDatas);
@@ -53,5 +53,5 @@ input {
     border: none;
     border-bottom: 1px solid gray;
     font-size: 21px;
-    padding: .3rem;
+    padding: .5rem;
 }</style>
