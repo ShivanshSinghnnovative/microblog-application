@@ -13,10 +13,11 @@
             </template>
             <template v-slot:footer>
               
-              <div> <img src="../public/red.png">
+              <div> 
+                <img src="../public/red.png">
                 {{ blog.like }}
                </div> 
-                <div class="topic" v-for="topic in blog.topics" :key="topic.id">
+                <div class="topic" v-for="topic in blog.topics" :key="topic.id" >
                     # {{ topic }}
                 </div>
             </template>
@@ -32,7 +33,40 @@ import { ref } from 'vue'
 const blogData = ref(blogsDatas);
 </script>
   
-<style setup>
+<style>
+*{
+    font-family: sans-serif;
+}
+.container {
+    border: 2px solid lightgray;
+    box-shadow: 6px 6px rgb(229, 228, 228);
+    width: 20rem;
+    border-radius: .5rem;
+}
+
+hr{
+    border: .3px solid rgb(238, 233, 233);
+}
+.title {
+    padding: 2rem;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+    height: 2rem;
+}
+
+.description {
+    height: 8rem;
+    padding: 2rem;
+    text-align: center;
+    font-size: 20px;
+}
+
+.like {
+    text-align: center;
+    font-size: 20px;
+    padding: 0.8rem;
+}
 .header {
     padding: 2rem;
     font-size: 20px;
