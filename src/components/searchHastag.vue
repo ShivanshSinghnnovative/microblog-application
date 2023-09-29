@@ -7,12 +7,12 @@
 <script setup>
 import { ref, watch, defineEmits } from 'vue';
 
-const searchHashtag = ref('');
+const searchBar = ref('');
 
 const emit = defineEmits('searchHashtag');
 
 watch(() => {
-  emit('searchHashtag', searchHashtag.value);
+  emit('searchHashtag', searchBar.value);
 });
 </script>
 

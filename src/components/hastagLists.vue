@@ -1,6 +1,6 @@
 <template>
     <div class="topic" v-for="topic in blog.topics" :key="topic.id" @click="clickedTopic(topic)">
-        # {{ topic }}
+      <a>  # {{ topic }}</a>
     </div>
 </template>
   
@@ -18,4 +18,10 @@ const clickedTopic = (topic) => {
     emits('clickedTopic', topic);
 };
 </script>
+
+<style>
+a{
+    border-bottom: 1px solid black;
+}
+</style>
   

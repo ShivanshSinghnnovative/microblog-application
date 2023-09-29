@@ -1,10 +1,10 @@
 <template>
-    <hashtagSearch @searchHashtag="updateHashTagFilter">
+    <searchHastag @searchHashtag="updateHashTagFilter">
         <template v-slot:search>
             Search Hashtag :
-            <input type="text" v-model="searchHashtag">
+            <input type="text" v-model="searchBar">
         </template>
-    </hashtagSearch>
+    </searchHastag>
     <div class="blogContainer">
         <cardDetails v-for="blog in filteredBlogs" :key="blog.id">
             <template v-slot:titles>
@@ -28,25 +28,25 @@
   
 <script setup>
 import cardDetails from './components/cardDetails.vue'
-import hashtagSearch from './components/searchHastag.vue'
+import searchHastag from './components/searchHastag.vue'
 import hastagLists from './components/hastagLists.vue'
 import blogsDatas from './assets/blogData.json'
 import { ref, computed } from 'vue'
 
 
 const blogData = ref(blogsDatas);
-const searchHashtag = ref('');
+const searchBar = ref('');
 
 const updateSearchHashtag = (topic) => {
-    searchHashtag.value = topic;
+    searchBar.value = topic;
 };
 
 const updateHashTagFilter = (hashtag) => {
-    searchHashtag.value = hashtag;
+    searchBar.value = hashtag;
 };
 
 const filteredBlogs = computed(() => {
-    const query = searchHashtag.value.trim().toLowerCase();
+    const query = searchBar.value.trim().toLowerCase();
 
     if (!query) {
         return blogData.value;
