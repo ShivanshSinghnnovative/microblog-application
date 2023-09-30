@@ -1,8 +1,7 @@
 <template>
     <div>
-        <searchHastag :searchValue="searchValue"  @clickedTopic="updateSearchTerm" />
-       
-      </div>
+        <searchHastag :searchValue="searchValue" @clickedTopic="updateSearchTerm" />
+    </div>
     <div class="blogContainer">
         <cardDetails v-for="blog in filteredBlogs" :key="blog.id">
             <template v-slot:titles>
@@ -12,51 +11,30 @@
                 {{ blog.description }}
             </template>
             <template v-slot:footer>
-
                 <div class="like">
-                    <img src="../public/red.png" @click="incrementLike(blog)">
+                    <img src="../public/red.png" @click="incrementLike(blog)" />
                     {{ blog.like }}
                 </div>
-
-                <hastagLists :blog="blog.topics" @clickedTopic="updateSearchTerm"/>
+                <hastagLists :blog="blog.topics" @clickedTopic="updateSearchTerm" />
             </template>
         </cardDetails>
     </div>
 </template>
   
 <script setup>
-import cardDetails from './components/cardDetails.vue'
-import searchHastag from './components/searchHastag.vue'
-import hastagLists from './components/hastagLists.vue'
-import blogsDatas from './assets/blogData.json'
-import { ref, computed } from 'vue'
+import cardDetails from "./components/cardDetails.vue";
+import searchHastag from "./components/searchHastag.vue";
+import hastagLists from "./components/hastagLists.vue";
+import { useMicroblog } from "./Composables/use-microblog.js";
 
-
-const blogData = ref(blogsDatas);
-const searchValue = ref('')
-
-
-const updateSearchTerm = (topic) => {
-  searchValue.value = topic;
-  console.log(searchValue.value)
-};
-
-const filteredBlogs = computed(() => {
-    const query = searchValue.value.trim().toLowerCase();
-
-    if (!query) {
-        return blogData.value;
-    }
-
-    return blogData.value.filter(blog =>
-        blog.topics.some(topic => topic.toLowerCase().includes(query))
-    );
-});
-
-const incrementLike = (blog) => {
-    blog.like += 1;
-}
+const {
+    searchValue,
+    updateSearchTerm,
+    filteredBlogs,
+    incrementLike,
+} = useMicroblog();
 </script>
+  
   
 <style>
 * {
@@ -120,4 +98,5 @@ input {
     border-bottom: 1px solid gray;
     font-size: 21px;
     padding: .5rem;
-}</style>
+}
+</style>
