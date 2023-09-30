@@ -27,12 +27,7 @@ import searchHastag from "./components/searchHastag.vue";
 import hastagLists from "./components/hastagLists.vue";
 import { useMicroblog } from "./Composables/use-microblog.js";
 
-const {
-    searchValue,
-    updateSearchTerm,
-    filteredBlogs,
-    incrementLike,
-} = useMicroblog();
+const { searchValue, updateSearchTerm, filteredBlogs, incrementLike } = useMicroblog();
 </script>
   
   
