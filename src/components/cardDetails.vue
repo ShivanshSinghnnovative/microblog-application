@@ -13,8 +13,11 @@
         <div class="like">
             <slot name="footer">
             </slot>
+            <slot name="hashtag">
+
+            </slot>
         </div>
-       
+
     </div>
 </template>
 
@@ -22,6 +25,4 @@
 
 </script>
 
-<style>
-
-</style>
+<style></style>
