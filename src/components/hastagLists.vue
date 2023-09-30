@@ -1,15 +1,15 @@
 <template>
-    <div class="topic" v-for="topic in blog.topics" :key="topic.id" @click="clickedTopic(topic)">
-      <a>  # {{ topic }}</a>
+    <div class="topic" v-for="topic in blog" :key="topic.id" @click="clickedTopic(topic)">
+        <a> # {{ topic }}</a>
     </div>
 </template>
   
 <script setup>
 import { defineProps, defineEmits } from 'vue';
-const props = defineProps({
-    blog: Object,
+
+defineProps({
+    blog: Array,
 });
-console.log(props);
 
 
 const emits = defineEmits(['clickedTopic']);
@@ -20,7 +20,7 @@ const clickedTopic = (topic) => {
 </script>
 
 <style>
-a{
+a {
     border-bottom: 1px solid black;
 }
 </style>

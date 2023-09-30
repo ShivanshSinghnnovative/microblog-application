@@ -1,23 +1,32 @@
 <template>
-  <div class="header">
-    <slot name="search"></slot>
-  </div>
+ 
+    <div class="header">
+      Search Hashtag :
+      <input type="text" v-model="inputTerm" @input="clickedTopic">
+    </div>
+  
 </template>
 
 <script setup>
-import { watch, defineEmits, defineProps } from 'vue';
+import { defineEmits , defineProps, ref , watch} from 'vue';
+
+const inputTerm = ref(props.searchValue);
+
+watch(() => props.searchValue, (newValue) => {
+  inputTerm.value = newValue;
+});
 
 const props = defineProps({
-    searchText: String,
+    searchValue: {
+      type:String
+    },
 });
 
-console.log(props);
 
-const emit = defineEmits('searchHashtag');
-
-watch(() => {
-  emit('searchHashtag', props.searchText);
-});
+const emit = defineEmits('clickedTopic');
+const clickedTopic =  () => {
+  emit('clickedTopic', inputTerm.value);
+};
 </script>
 
 

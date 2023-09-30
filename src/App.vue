@@ -1,10 +1,8 @@
 <template>
-    <searchHastag @searchHashtag="updateHashTagFilter">
-        <template v-slot:search>
-            Search Hashtag :
-            <input type="text" v-model="searchTerm" :searchTerm="searchTerm">
-        </template>
-    </searchHastag>
+    <div>
+        <searchHastag :searchValue="searchValue"  @clickedTopic="updateSearchTerm" />
+       
+      </div>
     <div class="blogContainer">
         <cardDetails v-for="blog in filteredBlogs" :key="blog.id">
             <template v-slot:titles>
@@ -20,7 +18,7 @@
                     {{ blog.like }}
                 </div>
 
-                <hastagLists :blog="blog" @clickedTopic="updateHashTagFilter" />
+                <hastagLists :blog="blog.topics" @clickedTopic="updateSearchTerm"/>
             </template>
         </cardDetails>
     </div>
@@ -35,14 +33,16 @@ import { ref, computed } from 'vue'
 
 
 const blogData = ref(blogsDatas);
-const searchTerm = ref('');
+const searchValue = ref('')
 
-const updateHashTagFilter = (hashtag) => {
-    searchTerm.value = hashtag;
+
+const updateSearchTerm = (topic) => {
+  searchValue.value = topic;
+  console.log(searchValue.value)
 };
 
 const filteredBlogs = computed(() => {
-    const query = searchTerm.value.trim().toLowerCase();
+    const query = searchValue.value.trim().toLowerCase();
 
     if (!query) {
         return blogData.value;
