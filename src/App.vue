@@ -25,7 +25,7 @@
 import cardDetails from "./components/cardDetails.vue";
 import searchHastag from "./components/searchHastag.vue";
 import hastagLists from "./components/hastagLists.vue";
-import { useMicroblog } from "./Composables/use-microblog.js";
+import { useMicroblog } from "./composables/use-microblog.js";
 
 const { searchValue, updateSearchTerm, filteredBlogs, incrementLike } = useMicroblog();
 </script>
